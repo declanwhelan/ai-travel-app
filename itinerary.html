@@ -231,26 +231,27 @@
         /* Add these new styles */
         .cultural-sidebar {
             position: fixed;
-            right: -350px;
-            top: 100px;
+            right: 0;
+            top: 0;
             width: 350px;
-            height: calc(100vh - 100px);
+            height: 100vh;
             background: #fff;
             box-shadow: -2px 0 5px rgba(0,0,0,0.1);
-            transition: right 0.3s ease;
+            transition: transform 0.3s ease;
             z-index: 999;
             overflow-y: auto;
             padding: 20px 20px 100px;
+            transform: translateX(100%);
         }
 
         .cultural-sidebar.open {
-            right: 0;
+            transform: translateX(0);
         }
 
         .sidebar-toggle {
             position: fixed;
             right: 20px;
-            top: 120px;
+            bottom: 20px;
             background: #4CAF50;
             color: white;
             border: none;
@@ -266,7 +267,7 @@
         }
 
         .sidebar-toggle:hover {
-            transform: translateX(-5px);
+            transform: translateY(-5px);
         }
 
         .custom-card {
@@ -572,17 +573,42 @@
 
         /* Optimize cultural sidebar for mobile */
         @media (max-width: 768px) {
+            .itinerary-container {
+                padding: 0;
+            }
+            .day-map-button {
+                display: none;
+            }
             .cultural-sidebar {
+                top: auto;
+                bottom: 0;
                 width: 100%;
-                right: -100%;
+                height: 85vh;
+                transform: translateY(100%);
             }
             
             .cultural-sidebar.open {
-                right: 0;
+                transform: translateY(0);
             }
             
             .custom-card {
                 margin-bottom: 15px;
+            }
+
+            .sidebar-toggle {
+                left: 20px;
+                right: auto;
+                padding: 10px;
+                border-radius: 50%;
+            }
+
+            .sidebar-toggle span {
+                display: none;
+            }
+
+            .sidebar-toggle i {
+                margin: 0;
+                font-size: 1.2em;
             }
         }
 
@@ -1217,7 +1243,8 @@
 
     <!-- Add this right after the <main> tag opens -->
     <button class="sidebar-toggle">
-        <i class="fas fa-robot"></i> Personal tour Guide
+        <i class="fas fa-robot"></i>
+        <span>Personal tour Guide</span>
     </button>
 
     <div class="cultural-sidebar">
