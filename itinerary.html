@@ -1115,14 +1115,22 @@
 
     <!-- Add this right after the <main> tag opens -->
     <button class="sidebar-toggle">
-        <i class="fas fa-info-circle"></i> Local Guide
+        <i class="fas fa-robot"></i> Personal tour Guide
     </button>
 
     <div class="cultural-sidebar">
+        <div class="custom-card" style="background: #fff3cd; border: 1px solid #ffeeba; margin-bottom: 20px;">
+            <h3 style="color: #856404; border-bottom-color: #856404;">⚠️ Local Safety Notice</h3>
+            <p style="color: #856404; margin: 10px 0;">Based on your location in the tourist district, please be mindful of your belongings. Street performers and crowded areas may attract pickpockets. Keep bags closed and in front of you.</p>
+            <p style="color: #856404; margin: 5px 0 0 0; font-size: 0.9em;">
+                <a href="#safety-tips" style="color: #755400; text-decoration: underline;">For more safety tips, see here →</a>
+            </p>
+        </div>
+
         <div class="ai-assistant-card">
             <h3>🤖 Travel Assistant</h3>
             <div class="ai-chat-container">
-                <p>Ask me anything about French culture, customs, or travel tips!</p>
+                <p>Hey, I'm Navi - your friendly travel assistant! Ask me anything about French culture, customs, or travel tips!</p>
                 <div class="ai-input-container">
                     <input type="text" 
                            class="ai-input" 
@@ -1192,7 +1200,7 @@
             </div>
         </div>
 
-        <div class="custom-card">
+        <div class="custom-card" id="safety-tips">
             <h3>🛡️ Safety Tips</h3>
             <ul class="safety-list">
                 <li>
