@@ -466,6 +466,43 @@
             transform: scale(1.1);
             box-shadow: 0 3px 8px rgba(0,0,0,0.3);
         }
+
+        .safety-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .safety-list li {
+            margin-bottom: 15px;
+            padding: 12px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: transform 0.2s ease;
+        }
+
+        .safety-list li:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .safety-tip strong {
+            display: block;
+            color: #2c3e50;
+            margin-bottom: 5px;
+            font-size: 0.95em;
+        }
+
+        .safety-tip p {
+            margin: 3px 0;
+            color: #505050;
+            font-size: 0.9em;
+        }
+
+        .safety-tip p:last-child {
+            margin-bottom: 0;
+        }
     </style>
 </head>
 <body>
@@ -1155,7 +1192,62 @@
             </div>
         </div>
 
-       
+        <div class="custom-card">
+            <h3>🛡️ Safety Tips</h3>
+            <ul class="safety-list">
+                <li>
+                    <div class="safety-tip">
+                        <strong>Emergency Numbers</strong>
+                        <p>Police: 17</p>
+                        <p>Ambulance: 15</p>
+                        <p>Fire: 18</p>
+                        <p>EU Emergency: 112</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="safety-tip">
+                        <strong>Tourist Areas</strong>
+                        <p>Be aware of pickpockets in crowded tourist spots and metro stations</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="safety-tip">
+                        <strong>Important Documents</strong>
+                        <p>Keep copies of passport and important documents in your hotel safe</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="safety-tip">
+                        <strong>Metro Safety</strong>
+                        <p>Avoid empty metro cars late at night. Stay in populated areas.</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="safety-tip">
+                        <strong>Scam Alert</strong>
+                        <p>Be wary of street games, fake petitions, and "free" bracelets</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="safety-tip">
+                        <strong>Valuables</strong>
+                        <p>Use anti-theft bags and keep valuables close to your body</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="safety-tip">
+                        <strong>Night Safety</strong>
+                        <p>Stick to well-lit streets and use official taxis at night</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="safety-tip">
+                        <strong>Health Tips</strong>
+                        <p>Carry your insurance card and know your embassy's location</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </div>
 
     <!-- Add this script before the closing </body> tag -->
