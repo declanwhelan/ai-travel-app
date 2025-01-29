@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Profile - ExploreAI</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .profile-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-header {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #eee;
+            padding: 2rem;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .profile-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('assets/images/map.png');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        .profile-header > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-photo-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+        }
+
+        .profile-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #4CAF50;
+        }
+
+        .photo-upload-label {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: #4CAF50;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .photo-upload-label:hover {
+            background: #45a049;
+        }
+
+        .profile-photo-input {
+            display: none;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+
+        .profile-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #eee;
+        }
+
+        .stat-card {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .update-button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: block;
+            margin: 2rem auto;
+            min-width: 200px;
+        }
+
+        .update-button:hover {
+            background: #45a049;
+        }
+
+        .profile-section {
+            background: white;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .traveller-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            justify-content: center;
+        }
+
+        .tag-input {
+            display: none;
+        }
+
+        .tag {
+            padding: 0.8rem 1.4rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            border: 2px solid transparent;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        /* Tag color variations */
+        .tag.nature { background: #e8f5e9; color: #2e7d32; }
+        .tag.culture { background: #fff3e0; color: #e65100; }
+        .tag.adventure { background: #e3f2fd; color: #1565c0; }
+        .tag.lifestyle { background: #f3e5f5; color: #7b1fa2; }
+        .tag.quirky { background: #fff8e1; color: #ff8f00; }
+
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            filter: brightness(0.95);
+        }
+
+        .tag-input:checked + .tag {
+            color: white;
+            font-weight: 500;
+        }
+
+        .tag-input:checked + .tag.nature { background: #2e7d32; }
+        .tag-input:checked + .tag.culture { background: #e65100; }
+        .tag-input:checked + .tag.adventure { background: #1565c0; }
+        .tag-input:checked + .tag.lifestyle { background: #7b1fa2; }
+        .tag-input:checked + .tag.quirky { background: #ff8f00; }
+
+        .traveller-section {
+            background: linear-gradient(to bottom right, #ffffff, #f8fdf8);
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 2px 12px rgba(76, 175, 80, 0.1);
+        }
+
+        .section-intro {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: #f8fdf8;
+            border-radius: 8px;
+            border-left: 4px solid #4CAF50;
+        }
+
+        .intro-icon {
+            font-size: 2rem;
+            color: #4CAF50;
+            margin-top: 0.2rem;
+        }
+
+        .intro-text {
+            flex: 1;
+        }
+
+        .intro-heading {
+            font-weight: 600;
+            color: #2e7d32;
+            margin: 0 0 0.5rem 0;
+        }
+
+        .intro-description {
+            color: #666;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .selection-counter {
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="nav-content">
+            <div class="logo">ExploreAI</div>
+            
+            <!-- Add hamburger button -->
+            <button class="menu-toggle" aria-label="Toggle menu">
+                <span class="hamburger"></span>
+            </button>
+    
+            <!-- Wrap existing nav-links in a nav-menu div -->
+            <div class="nav-menu">
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="preferences.html">Plan Your Journey</a></li>
+                    <li class="auth-required hidden"><a href="itinerary.html">Your Itinerary</a></li>
+                    <li class="auth-required hidden"><a href="cultural-passport.html" id="culturalPassport">Cultural Passport</a></li>
+                    <li class="auth-required hidden"><a href="profile.html" id="profile">Profile</a></li>
+                    <li class="auth-item">
+                        <button id="authButton" class="auth-button">Log In</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="nav-overlay"></div>
+
+    <main class="requires-auth">
+        <div class="profile-container">
+            <div class="profile-header">
+                <div class="profile-photo-container">
+                    <img id="photoPreview" src="assets/images/profile.png" alt="Profile Photo" class="profile-photo">
+                    <label for="profilePhoto" class="photo-upload-label">
+                        <i class="fas fa-camera"></i>
+                    </label>
+                    <input type="file" id="profilePhoto" class="profile-photo-input" accept="image/*">
+                </div>
+                <div>
+                    <h1>Your Profile</h1>
+                    <p>Manage your account settings and view your travel statistics</p>
+                </div>
+            </div>
+
+            <form id="profileForm">
+                <div class="profile-section">
+                    <h2 class="section-title">Personal Information</h2>
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required placeholder="Enter your email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <input type="text" id="location" name="location" placeholder="Enter your city">
+                    </div>
+                </div>
+
+                <div class="profile-section traveller-section">
+                    <h2 class="section-title">Traveller Type</h2>
+                    <div class="section-intro">
+                        <i class="fas fa-compass intro-icon"></i>
+                        <div class="intro-text">
+                            <p class="intro-heading">What kind of traveller are you?</p>
+                            <p class="intro-description">Select up to 3 traits that best describe your travel style. 
+                            This helps us personalize your experience and connect you with like-minded explorers!</p>
+                        </div>
+                    </div>
+                    <div class="traveller-tags">
+                        <!-- Nature & Outdoors -->
+                        <input type="checkbox" id="natureExplorer" class="tag-input">
+                        <label for="natureExplorer" class="tag nature">tree hugger</label>
+
+                        <input type="checkbox" id="hikingEnthusiast" class="tag-input">
+                        <label for="hikingEnthusiast" class="tag nature">mountain goat</label>
+
+                        <input type="checkbox" id="beachBum" class="tag-input">
+                        <label for="beachBum" class="tag nature">beach bum</label>
+
+                        <!-- Cultural -->
+                        <input type="checkbox" id="cultural" class="tag-input">
+                        <label for="cultural" class="tag culture">culture vulture</label>
+
+                        <input type="checkbox" id="historyBuff" class="tag-input">
+                        <label for="historyBuff" class="tag culture">history nerd</label>
+
+                        <input type="checkbox" id="foodie" class="tag-input">
+                        <label for="foodie" class="tag culture">food detective</label>
+
+                        <!-- Adventure -->
+                        <input type="checkbox" id="adrenaline" class="tag-input">
+                        <label for="adrenaline" class="tag adventure">danger magnet</label>
+
+                        <input type="checkbox" id="spontaneous" class="tag-input">
+                        <label for="spontaneous" class="tag adventure">chaos embracer</label>
+
+                        <input type="checkbox" id="explorer" class="tag-input">
+                        <label for="explorer" class="tag adventure">indiana jones wannabe</label>
+
+                        <!-- Lifestyle -->
+                        <input type="checkbox" id="luxury" class="tag-input">
+                        <label for="luxury" class="tag lifestyle">bougie traveler</label>
+
+                        <input type="checkbox" id="budget" class="tag-input">
+                        <label for="budget" class="tag lifestyle">bargain hunter</label>
+
+                        <input type="checkbox" id="nightlife" class="tag-input">
+                        <label for="nightlife" class="tag lifestyle">party animal</label>
+
+                        <input type="checkbox" id="cityExplorer" class="tag-input">
+                        <label for="cityExplorer" class="tag lifestyle">concrete jungle expert</label>
+
+                        <!-- Quirky -->
+                        <input type="checkbox" id="overthinker" class="tag-input">
+                        <label for="overthinker" class="tag quirky">spreadsheet enthusiast</label>
+
+                        <input type="checkbox" id="photoEnthusiast" class="tag-input">
+                        <label for="photoEnthusiast" class="tag quirky">instagram husband</label>
+
+                        <input type="checkbox" id="localExperience" class="tag-input">
+                        <label for="localExperience" class="tag quirky">local wannabe</label>
+
+                        <input type="checkbox" id="artLover" class="tag-input">
+                        <label for="artLover" class="tag culture">museum dweller</label>
+
+                        <input type="checkbox" id="coffeeSnob" class="tag-input">
+                        <label for="coffeeSnob" class="tag quirky">café critic</label>
+
+                        <input type="checkbox" id="jetLag" class="tag-input">
+                        <label for="jetLag" class="tag quirky">time zone collector</label>
+                    </div>
+                    <div class="selection-counter">0/3 traits selected</div>
+                </div>
+
+                <div class="profile-stats">
+                    <div class="stat-card">
+                        <div class="stat-number">12</div>
+                        <div class="stat-label">Places Visited</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">8</div>
+                        <div class="stat-label">Cultural Activities</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">4</div>
+                        <div class="stat-label">Countries Explored</div>
+                    </div>
+                </div>
+
+                <button type="submit" class="update-button">Update Profile</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 ExploreAI. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Handle profile photo preview
+        document.getElementById('profilePhoto').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('photoPreview').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Handle form submission
+        document.getElementById('profileForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            
+            // Add your API call here to update the profile
+            console.log('Form submitted:', Object.fromEntries(formData));
+            
+            // Show success message
+            alert('Profile updated successfully!');
+        });
+
+        // Load user data when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add your API call here to fetch user data
+            // For now, we'll simulate some data
+            const userData = {
+                name: 'Sarah Jane Thompson',
+                email: 'sarah.thompson@example.com',
+                location: 'New York, USA'
+            };
+
+            // Populate the form
+            document.getElementById('name').value = userData.name;
+            document.getElementById('email').value = userData.email;
+            document.getElementById('location').value = userData.location;
+        });
+
+        // Limit selection to maximum 3 tags
+        const tagInputs = document.querySelectorAll('.tag-input');
+        tagInputs.forEach(input => {
+            input.addEventListener('change', function() {
+                const checkedTags = document.querySelectorAll('.tag-input:checked');
+                if (checkedTags.length > 3) {
+                    input.checked = false;
+                }
+            });
+        });
+
+        // Update the tag selection counter
+        const updateCounter = () => {
+            const checkedCount = document.querySelectorAll('.tag-input:checked').length;
+            document.querySelector('.selection-counter').textContent = 
+                `${checkedCount}/3 traits selected`;
+        };
+
+        // Add to existing tag input event listeners
+        tagInputs.forEach(input => {
+            input.addEventListener('change', function() {
+                const checkedTags = document.querySelectorAll('.tag-input:checked');
+                if (checkedTags.length > 3) {
+                    this.checked = false;
+                    alert('Please select up to 3 traveller types that best describe you!');
+                }
+                updateCounter();
+            });
+        });
+
+        // Initialize counter
+        updateCounter();
+    </script>
+
+    <script src="js/auth.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cultural Passport</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/passport.css">
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="nav-content">
+            <div class="logo">ExploreAI</div>
+            
+            <!-- Add hamburger button -->
+            <button class="menu-toggle" aria-label="Toggle menu">
+                <span class="hamburger"></span>
+            </button>
+    
+            <!-- Wrap existing nav-links in a nav-menu div -->
+            <div class="nav-menu">
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="preferences.html">Plan Your Journey</a></li>
+                    <li class="auth-required hidden"><a href="itinerary.html">Your Itinerary</a></li>
+                    <li class="auth-required hidden"><a href="cultural-passport.html" id="culturalPassport">Cultural Passport</a></li>
+                    <li class="auth-required hidden"><a href="profile.html" id="profile">Profile</a></li>
+                    <li class="auth-item">
+                        <button id="authButton" class="auth-button">Log In</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="nav-overlay"></div>
+
+    <main class="requires-auth">
+            <div id="loadingSpinner" class="loading-container">
+                <div class="passport-spinner">
+                    <div class="spinner-border"></div>
+                    <div class="spinner-inner">
+                        <div class="compass-star"></div>
+                    </div>
+                </div>
+                <p class="loading-text">Finding your passport</p>
+            </div>
+
+        <div id="passportContent" class="passport-container" style="display: none; margin-top: 60px;">
+            <div class="passport-book">
+                <div class="passport-cover">
+                    <div class="passport-emblem"></div>
+                    <h1>CULTURAL PASSPORT</h1>
+                    <h2>WORLD EXPLORER</h2>
+                    <div class="passport-lines">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+                
+                <div class="passport-page">
+                    <!-- Profile Section styled as passport ID page -->
+                    <div class="profile-section">
+                        <div class="passport-header">
+                            <h2>IDENTIFICATION PAGE</h2>
+                            <div class="passport-number">PASSPORT No. WE-2024-${userID}</div>
+                            <div class="issue-date">Date of Issue: 01 MAR 2024</div>
+                            <div class="expiry-date">Date of Expiry: 01 MAR 2029</div>
+                        </div>
+                        <div class="profile-details">
+                            <div class="profile-image">
+                                <img src="https://picsum.photos/seed/user123/150/150" alt="Profile Photo">
+                                <div class="profile-signature">Holder's Signature</div>
+                            </div>
+                            <div class="profile-info">
+                                <div class="info-row">
+                                    <label>Surname:</label>
+                                    <span>THOMPSON</span>
+                                </div>
+                                <div class="info-row">
+                                    <label>Given Names:</label>
+                                    <span>SARAH JANE</span>
+                                </div>
+                                <div class="info-row">
+                                    <label>Explorer Level:</label>
+                                    <span>CULTURAL EXPLORER III</span>
+                                </div>
+                                <div class="info-row">
+                                    <label>Cultural Points:</label>
+                                    <span>2,450</span>
+                                </div>
+                                <div class="info-row">
+                                    <label>Place of Issue:</label>
+                                    <span>EXPLOREAI HQ</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Badges Section styled as passport visa pages -->
+                    <div class="passport-stamps">
+                        <div class="page-header">
+                            <h2>VISAS & ACHIEVEMENTS</h2>
+                            <div class="pagination-controls">
+                                <button id="prevPage" class="page-btn">&lt; Previous</button>
+                                <span id="pageIndicator">Page 1 of 3</span>
+                                <button id="nextPage" class="page-btn">Next &gt;</button>
+                            </div>
+                        </div>
+                        <div class="badges-grid" id="badgesGrid">
+                                <!-- Achieved Badge -->
+                                <div class="badge achieved passport-stamp">
+                                    <div class="badge-icon">
+                                        <img src="assets/images/culinary-adventurer.webp" alt="Culinary Adventurer Badge">
+                                    </div>
+                                    <div class="badge-content">
+                                        <h3>Culinary Adventurer</h3>
+                                        <div class="points-value">500 points</div>
+                                        <div class="requirements">Try 5 local dishes</div>
+                                        <div class="achievement-date">Achieved: March 15, 2024</div>
+                                    </div>
+                                </div>
+    
+                                <div class="badge locked passport-stamp">
+                                    <div class="badge-icon">
+                                        <img src="assets/images/history-buff.webp" alt="History Buff Badge" >
+                                    </div>
+                                    <div class="badge-content">
+                                        <h3>History Buff</h3>
+                                        <div class="points-value">750 points</div>
+                                        <div class="requirements">Visit 3 historical landmarks</div>
+                                        <div class="progress">
+                                            <div class="progress-bar" style="width: 33%"></div>
+                                            <span class="progress-text">1/3</span>
+                                        </div>
+                                    </div>
+                                </div>
+    
+                                <div class="badge locked passport-stamp">
+                                    <div class="badge-icon">
+                                        <img src="assets/images/photo-journalist.webp" alt="Photo Journalist Badge">
+                                    </div>
+                                    <div class="badge-content">
+                                        <h3>Photo Journalist</h3>
+                                        <div class="points-value">300 points</div>
+                                        <div class="requirements">Share 5 travel photos</div>
+                                        <div class="progress">
+                                            <div class="progress-bar" style="width: 40%"></div>
+                                            <span class="progress-text">2/5</span>
+                                        </div>
+                                    </div>
+                                </div>
+    
+                                <div class="badge achieved passport-stamp">
+                                    <div class="badge-icon">
+                                        <img src="assets/images/trail-blazer.webp" alt="Trail Blazer Badge">
+                                    </div>
+                                    <div class="badge-content">
+                                        <h3>Trail Blazer</h3>
+                                        <div class="points-value">600 points</div>
+                                        <div class="achievement-date">Achieved: March 20, 2024</div>
+                                    </div>
+                                </div>
+    
+                                <div class="badge achieved passport-stamp">
+                                    <div class="badge-icon">
+                                        <img src="assets/images/art-connoisseur.webp" alt="Art Connoisseur Badge">
+                                    </div>
+                                    <div class="badge-content">
+                                        <h3>Art Connoisseur</h3>
+                                        <div class="points-value">450 points</div>
+                                        <div class="achievement-date">Achieved: March 12, 2024</div>
+                                    </div>
+                                </div>
+    
+                                <div class="badge achieved passport-stamp">
+                                    <div class="badge-icon">
+                                        <img src="assets/images/music-explorer.webp" alt="Music Explorer Badge">
+                                    </div>
+                                    <div class="badge-content">
+                                        <h3>Music Explorer</h3>
+                                        <div class="points-value">400 points</div>
+                                        <div class="achievement-date">Achieved: March 16, 2024</div>
+                                    </div>
+                                </div>
+    
+                                <div class="badge achieved passport-stamp">
+                                    <div class="badge-icon">
+                                        <img src="assets/images/literary-wanderer.webp" alt="Literary Wanderer Badge">
+                                    </div>
+                                    <div class="badge-content">
+                                        <h3>Literary Wanderer</h3>
+                                        <div class="points-value">550 points</div>
+                                        <div class="achievement-date">Achieved: March 14, 2024</div>
+                                    </div>
+                                </div>
+    
+                                <div class="badge achieved passport-stamp">
+                                    <div class="badge-icon">
+                                        <img src="assets/images/festival-enthusiast.webp" alt="Festival Enthusiast Badge">
+                                    </div>
+                                    <div class="badge-content">
+                                        <h3>Festival Enthusiast</h3>
+                                        <div class="points-value">800 points</div>
+                                        <div class="achievement-date">Achieved: March 19, 2024</div>
+                                    </div>
+                                </div>
+    
+                                <div class="badge achieved passport-stamp">
+                                    <div class="badge-icon">
+                                        <img src="assets/images/community-champion.webp" alt="Community Champion Badge">
+                                    </div>
+                                    <div class="badge-content">
+                                        <h3>Community Champion</h3>
+                                        <div class="points-value">700 points</div>
+                                        <div class="achievement-date">Achieved: March 13, 2024</div>
+                                    </div>
+                                </div>
+    
+                                <div class="badge achieved passport-stamp">
+                                    <div class="badge-icon">
+                                        <img src="assets/images/language-explorer.webp" alt="Language Explorer Badge">
+                                    </div>
+                                    <div class="badge-content">
+                                        <h3>Language Explorer</h3>
+                                        <div class="points-value">650 points</div>
+                                        <div class="achievement-date">Achieved: March 17, 2024</div>
+                                    </div>
+                                </div>
+    
+                                <div class="badge achieved passport-stamp">
+                                    <div class="badge-icon">
+                                        <img src="assets/images/urban-navigator.webp" alt="Urban Navigator Badge">
+                                    </div>
+                                    <div class="badge-content">
+                                        <h3>Urban Navigator</h3>
+                                        <div class="points-value">450 points</div>
+                                        <div class="achievement-date">Achieved: March 21, 2024</div>
+                                    </div>
+                                </div>
+    
+                                <!-- Locked Badge -->
+                                <div class="badge locked passport-stamp">
+                                    <div class="badge-icon">
+                                        <img src="assets/images/art-enthusiast.webp" alt="Arts Enthusiast Badge">
+                                    </div>
+                                    <div class="badge-content">
+                                        <h3>Arts Enthusiast</h3>
+                                        <div class="points-value">600 points</div>
+                                        <div class="requirements">Complete 2 local performances</div>
+                                        <div class="progress">
+                                            <div class="progress-bar" style="width: 50%"></div>
+                                            <span class="progress-text">1/2</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 ExploreAI. All rights reserved.</p>
+    </footer>
+
+    <script src="js/auth.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        window.addEventListener('load', function() {
+            const spinner = document.getElementById('loadingSpinner');
+            const content = document.getElementById('passportContent');
+            const badgesGrid = document.getElementById('badgesGrid');
+            const prevBtn = document.getElementById('prevPage');
+            const nextBtn = document.getElementById('nextPage');
+            const pageIndicator = document.getElementById('pageIndicator');
+            
+            // Get all badges and convert to array
+            const badges = Array.from(badgesGrid.getElementsByClassName('badge'));
+            const badgesPerPage = 4;
+            const totalPages = Math.ceil(badges.length / badgesPerPage);
+            let currentPage = 1;
+
+            function showPage(page) {
+                const start = (page - 1) * badgesPerPage;
+                const end = start + badgesPerPage;
+                
+                badges.forEach((badge, index) => {
+                    badge.style.display = (index >= start && index < end) ? 'flex' : 'none';
+                });
+                
+                pageIndicator.textContent = `Page ${page} of ${totalPages}`;
+                prevBtn.disabled = page === 1;
+                nextBtn.disabled = page === totalPages;
+            }
+
+            prevBtn.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    showPage(currentPage);
+                }
+            });
+
+            nextBtn.addEventListener('click', () => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    showPage(currentPage);
+                }
+            });
+
+            // Initial page load
+            setTimeout(() => {
+                spinner.style.display = 'none';
+                content.style.display = 'block';
+                showPage(1);
+            }, 500);
+        });
+    </script>
+</body>
+</html>

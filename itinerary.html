@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Itinerary - Wanderlust Explorer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .attendance-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .attendance-checkbox input[type="checkbox"] {
+            display: none;
+        }
+
+        .attendance-checkbox label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 10px 20px;
+            background: #f0f0f0;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .attendance-checkbox label:hover {
+            background: #e0e0e0;
+        }
+
+        .attendance-checkbox input[type="checkbox"]:checked + label {
+            background: #4CAF50;
+            color: white;
+            animation: checkboxPop 0.5s ease;
+            border: 2px solid #388E3C;
+        }
+
+        @keyframes checkboxPop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            clip-path: polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%);
+            animation: explode 1s ease-out forwards;
+            z-index: 1000;
+            pointer-events: none;
+        }
+        .attendButton {
+            margin-right: 10px;
+        }
+
+        .business-details {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 15px;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .business-details h4 {
+            color: #2c3e50;
+            margin: 0 0 10px 0;
+            font-size: 1.1em;
+        }
+
+        .business-info {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 0.9em;
+        }
+
+        .business-info p {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #505050;
+        }
+
+        .call-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background 0.3s ease;
+        }
+
+        .call-button:hover {
+            background: #45a049;
+        }
+
+        .business-contact {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .action-buttons {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .action-button {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 20px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+        }
+
+        .report-button {
+            background: #ff4444;
+            color: white;
+        }
+
+        .report-button:hover {
+            background: #cc0000;
+        }
+
+        .reserve-button {
+            background: #ffd700;
+            color: #333;
+        }
+
+        .reserve-button:hover {
+            background: #ffcc00;
+        }
+
+        .location {
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .location:hover {
+            color: #007bff;
+        }
+
+        .location i {
+            animation: bounce 1s ease infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+        }
+
+        .map-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .map-modal.show {
+            opacity: 1;
+        }
+
+        .map-modal-content {
+            background-color: #fefefe;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 12px;
+            width: 80%;
+            max-width: 600px;
+            position: relative;
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+        }
+
+        .map-modal.show .map-modal-content {
+            transform: translateY(0);
+        }
+
+        .close-map {
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .close-map:hover {
+            color: #333;
+        }
+
+        #mapImage {
+            width: 100%;
+            height: 400px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        #mapLocationTitle {
+            color: #2c3e50;
+            margin: 0 0 10px 0;
+            font-size: 1.1em;
+        }
+
+        /* Add these new styles */
+        .cultural-sidebar {
+            position: fixed;
+            right: -350px;
+            top: 100px;
+            width: 350px;
+            height: 100vh;
+            background: #fff;
+            box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+            transition: right 0.3s ease;
+            z-index: 999;
+            overflow-y: auto;
+            padding: 80px 20px 20px;
+        }
+
+        .cultural-sidebar.open {
+            right: 0;
+        }
+
+        .sidebar-toggle {
+            position: fixed;
+            right: 20px;
+            top: 120px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-toggle:hover {
+            transform: translateX(-5px);
+        }
+
+        .custom-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .custom-card h3 {
+            color: #2c3e50;
+            margin: 0 0 15px 0;
+            font-size: 1.2em;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 5px;
+        }
+
+        .customs-list, .phrase-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .customs-list li {
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .customs-list li:before {
+            content: "🇫🇷";
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .phrase-item {
+            margin-bottom: 15px;
+            padding: 8px;
+            border-radius: 8px;
+            background: white;
+            transition: transform 0.2s ease;
+        }
+
+        .phrase-item:hover {
+            transform: translateX(5px);
+        }
+
+        .french {
+            color: #2c3e50;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .pronunciation {
+            color: #666;
+            font-style: italic;
+            font-size: 0.8em;
+        }
+
+        .english {
+            color: #4CAF50;
+            font-size: 0.9em;
+        }
+
+        .ai-assistant-card {
+            background: #f0f7ff;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #cce4ff;
+        }
+
+        .ai-assistant-card h3 {
+            color: #2c3e50;
+            margin: 0 0 15px 0;
+            font-size: 1.2em;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 5px;
+        }
+
+        .ai-chat-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .ai-input-container {
+            display: flex;
+            gap: 8px;
+        }
+
+        .ai-input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            font-size: 0.9em;
+            transition: border-color 0.3s ease;
+        }
+
+        .ai-input:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        .ai-submit {
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 0 20px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .ai-submit:hover {
+            background: #0056b3;
+        }
+
+        .ai-response {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 10px;
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .ai-response.show {
+            display: block;
+        }
+
+        .ai-thinking {
+            display: none;
+            color: #666;
+            font-style: italic;
+            padding: 10px;
+        }
+
+        .example-questions {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .example-question {
+            display: inline-block;
+            background: #e9ecef;
+            padding: 5px 10px;
+            border-radius: 15px;
+            margin: 3px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .example-question:hover {
+            background: #dee2e6;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="nav-content">
+            <div class="logo">ExploreAI</div>
+            
+            <!-- Add hamburger button -->
+            <button class="menu-toggle" aria-label="Toggle menu">
+                <span class="hamburger"></span>
+            </button>
+    
+            <!-- Wrap existing nav-links in a nav-menu div -->
+            <div class="nav-menu">
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="preferences.html">Plan Your Journey</a></li>
+                    <li class="auth-required hidden"><a href="itinerary.html">Your Itinerary</a></li>
+                    <li class="auth-required hidden"><a href="cultural-passport.html" id="culturalPassport">Cultural Passport</a></li>
+                    <li class="auth-required hidden"><a href="profile.html" id="profile">Profile</a></li>
+                    <li class="auth-item">
+                        <button id="authButton" class="auth-button">Log In</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="nav-overlay"></div>
+    <main>
+        <!-- Loading Spinner -->
+        <div id="loadingSpinner" class="loading-container">
+            <div class="itinerary-spinner">
+                <div class="spinner-border"></div>
+                <div class="spinner-inner">
+                    <i class="fas fa-map-marked-alt"></i>
+                </div>
+            </div>
+            <p class="loading-text">Planning your adventure</p>
+        </div>
+
+        <!-- Itinerary Content -->
+        <div id="itineraryContent" class="itinerary-container" style="display: none;">
+            <div class="itinerary-header">
+                <h1>Your Adventure Awaits</h1>
+                <p>A carefully curated 3-day experience in the heart of the city</p>
+            </div>
+            
+    <div class="day-container">
+        <div class="day-header">
+            <div class="day-header-background">
+                <img src="assets/images/day1.png" alt="Day 1 Background" class="day-header-image">
+            </div>
+            <h2>Day 1 - Monday, March 25</h2>
+        </div>
+        <div class="activity">
+            <div class="activity-image">
+                <img src="https://picsum.photos/seed/tour1/600/400" alt="Historic Tour">
+            </div>
+            <div class="activity-details">
+                <time>09:00 AM</time>
+                <h3>Historical Walking Tour</h3>
+                <p>Embark on a fascinating journey through time as our expert guide leads you through centuries of history. Discover hidden gems and fascinating stories of the city's past.</p>
+                <p class="location"><i class="fas fa-map-marker-alt"></i> Central Square</p>
+                <div class="activity-tags">
+                    <span class="tag cultural">Cultural</span>
+                    <span class="tag activity">Walking</span>
+                </div>
+                <div class="action-buttons">
+                    <div class="attendance-checkbox">
+                        <input type="checkbox" id="attended-activity-1" class="attendance-check">
+                        <label for="attended-activity-1">
+                            <i class="fas fa-check attendButton"></i> I went
+                        </label>
+                    </div>
+                    <button class="action-button reserve-button">
+                        <i class="fas fa-calendar-times"></i> Couldn't book
+                    </button>
+                    <button class="action-button report-button">
+                        <i class="fas fa-flag"></i> Report
+                    </button>
+                </div>
+                <div class="business-details">
+                    <h4>Business Information</h4>
+                    <div class="business-info">
+                        <p><i class="fas fa-building"></i> Central Square Historical Tours</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 123 History Lane, Downtown District</p>
+                        <p><i class="fas fa-envelope"></i> info@historicaltours.com</p>
+                        <div class="business-contact">
+                            <p><i class="fas fa-phone"></i> (555) 123-4567</p>
+                            <button class="call-button">
+                                <i class="fas fa-phone"></i> Call
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="activity">
+            <div class="activity-image">
+                <img src="https://picsum.photos/seed/food1/600/400" alt="Local Cuisine">
+            </div>
+            <div class="activity-details">
+                <time>12:30 PM</time>
+                <h3>Local Cuisine Experience</h3>
+                <p>Savor the authentic flavors of our region at the renowned Café Artisan. Our culinary expert will guide you through a tasting menu of local specialties.</p>
+                <p class="location"><i class="fas fa-map-marker-alt"></i> 123 Gourmet Street</p>
+                <div class="activity-tags">
+                    <span class="tag food">Cuisine</span>
+                    <span class="tag cultural">Local</span>
+                </div>
+                <div class="action-buttons">
+                    <div class="attendance-checkbox">
+                        <input type="checkbox" id="attended-activity-2" class="attendance-check">
+                        <label for="attended-activity-2">
+                            <i class="fas fa-check attendButton"></i> I went
+                        </label>
+                    </div>
+                    <button class="action-button reserve-button">
+                        <i class="fas fa-calendar-times"></i> Couldn't book
+                    </button>
+                    <button class="action-button report-button">
+                        <i class="fas fa-flag"></i> Report
+                    </button>
+                </div>
+                <div class="business-details">
+                    <h4>Business Information</h4>
+                    <div class="business-info">
+                        <p><i class="fas fa-building"></i> Café Artisan</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 123 Gourmet Street</p>
+                        <p><i class="fas fa-envelope"></i> info@cafeartisan.com</p>
+                        <div class="business-contact">
+                            <p><i class="fas fa-phone"></i> (555) 789-0123</p>
+                            <button class="call-button">
+                                <i class="fas fa-phone"></i> Call
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- New afternoon activity for Day 1 -->
+        <div class="activity">
+            <div class="activity-image">
+                <img src="https://picsum.photos/seed/art1/600/400" alt="Art Gallery">
+            </div>
+            <div class="activity-details">
+                <time>3:30 PM</time>
+                <h3>Contemporary Art Gallery Tour</h3>
+                <p>Immerse yourself in the city's vibrant art scene with a guided tour of the Modern Art Gallery. Experience thought-provoking exhibitions and meet local artists.</p>
+                <p class="location"><i class="fas fa-map-marker-alt"></i> Modern Art Gallery, 45 Culture Avenue</p>
+                <div class="activity-tags">
+                    <span class="tag cultural">Art</span>
+                    <span class="tag activity">Gallery</span>
+                </div>
+                <div class="action-buttons">
+                    <div class="attendance-checkbox">
+                        <input type="checkbox" id="attended-activity-3" class="attendance-check">
+                        <label for="attended-activity-3">
+                            <i class="fas fa-check attendButton"></i> I went
+                        </label>
+                    </div>
+                    <button class="action-button reserve-button">
+                        <i class="fas fa-calendar-times"></i> Couldn't book
+                    </button>
+                    <button class="action-button report-button">
+                        <i class="fas fa-flag"></i> Report
+                    </button>
+                </div>
+                <div class="business-details">
+                    <h4>Business Information</h4>
+                    <div class="business-info">
+                        <p><i class="fas fa-building"></i> Modern Art Gallery</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 45 Culture Avenue</p>
+                        <p><i class="fas fa-envelope"></i> info@modernartgallery.com</p>
+                        <div class="business-contact">
+                            <p><i class="fas fa-phone"></i> (555) 246-8020</p>
+                            <button class="call-button">
+                                <i class="fas fa-phone"></i> Call
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- New evening activity for Day 1 -->
+        <div class="activity">
+            <div class="activity-image">
+                <img src="https://picsum.photos/seed/concert1/600/400" alt="Evening Concert">
+            </div>
+            <div class="activity-details">
+                <time>7:00 PM</time>
+                <h3>Classical Music Concert</h3>
+                <p>End your day with an enchanting evening of classical music at the historic Opera House, featuring local symphony orchestra performing beloved masterpieces.</p>
+                <p class="location"><i class="fas fa-map-marker-alt"></i> City Opera House</p>
+                <div class="activity-tags">
+                    <span class="tag cultural">Music</span>
+                    <span class="tag entertainment">Concert</span>
+                </div>
+                <div class="action-buttons">
+                    <div class="attendance-checkbox">
+                        <input type="checkbox" id="attended-activity-4" class="attendance-check">
+                        <label for="attended-activity-4">
+                            <i class="fas fa-check attendButton"></i> I went
+                        </label>
+                    </div>
+                    <button class="action-button reserve-button">
+                        <i class="fas fa-calendar-times"></i> Couldn't book
+                    </button>
+                    <button class="action-button report-button">
+                        <i class="fas fa-flag"></i> Report
+                    </button>
+                </div>
+                <div class="business-details">
+                    <h4>Business Information</h4>
+                    <div class="business-info">
+                        <p><i class="fas fa-building"></i> City Opera House</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 123 Opera Lane, Downtown District</p>
+                        <p><i class="fas fa-envelope"></i> info@cityoperahouse.com</p>
+                        <div class="business-contact">
+                            <p><i class="fas fa-phone"></i> (555) 555-1234</p>
+                            <button class="call-button">
+                                <i class="fas fa-phone"></i> Call
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="day-container">
+        <div class="day-header">
+            <div class="day-header-background">
+                <img src="assets/images/chef.png" alt="Day 1 Background" class="day-header-image">
+            </div>
+            <h2>Day 2 - Tuesday, March 26</h2>
+        </div>
+        <div class="activity">
+            <div class="activity-image">
+                <img src="https://picsum.photos/seed/cooking1/600/400" alt="Cooking Class">
+            </div>
+            <div class="activity-details">
+                <time>10:00 AM</time>
+                <h3>Master Chef Workshop</h3>
+                <p>Roll up your sleeves for an immersive cooking experience. Learn traditional recipes and modern techniques from our professional chefs.</p>
+                <p class="location"><i class="fas fa-map-marker-alt"></i> Culinary Institute</p>
+                <div class="activity-tags">
+                    <span class="tag food">Cooking</span>
+                    <span class="tag activity">Workshop</span>
+                </div>
+                <div class="action-buttons">
+                    <div class="attendance-checkbox">
+                        <input type="checkbox" id="attended-activity-5" class="attendance-check">
+                        <label for="attended-activity-5">
+                            <i class="fas fa-check attendButton attendButton"></i> I went
+                        </label>
+                    </div>
+                    <button class="action-button reserve-button">
+                        <i class="fas fa-calendar-times"></i> Couldn't book
+                    </button>
+                    <button class="action-button report-button">
+                        <i class="fas fa-flag"></i> Report
+                    </button>
+                </div>
+                <div class="business-details">
+                    <h4>Business Information</h4>
+                    <div class="business-info">
+                        <p><i class="fas fa-building"></i> Culinary Institute</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 123 Culinary Lane, Downtown District</p>
+                        <p><i class="fas fa-envelope"></i> info@culinaryinstitute.com</p>
+                        <div class="business-contact">
+                            <p><i class="fas fa-phone"></i> (555) 876-5432</p>
+                            <button class="call-button">
+                                <i class="fas fa-phone"></i> Call
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- New afternoon activities for Day 2 -->
+        <div class="activity">
+            <div class="activity-image">
+                <img src="https://picsum.photos/seed/wine1/600/400" alt="Wine Tasting">
+            </div>
+            <div class="activity-details">
+                <time>2:30 PM</time>
+                <h3>Wine Country Tour</h3>
+                <p>Visit local vineyards and learn about wine-making processes while sampling some of the region's finest wines paired with artisanal cheeses.</p>
+                <p class="location"><i class="fas fa-map-marker-alt"></i> Valley Wine Estate</p>
+                <div class="activity-tags">
+                    <span class="tag food">Wine</span>
+                    <span class="tag cultural">Tasting</span>
+                </div>
+                <div class="action-buttons">
+                    <div class="attendance-checkbox">
+                        <input type="checkbox" id="attended-activity-6" class="attendance-check">
+                        <label for="attended-activity-6">
+                            <i class="fas fa-check attendButton"></i> I went
+                        </label>
+                    </div>
+                    <button class="action-button reserve-button">
+                        <i class="fas fa-calendar-times"></i> Couldn't book
+                    </button>
+                    <button class="action-button report-button">
+                        <i class="fas fa-flag"></i> Report
+                    </button>
+                </div>
+                <div class="business-details">
+                    <h4>Business Information</h4>
+                    <div class="business-info">
+                        <p><i class="fas fa-building"></i> Valley Wine Estate</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 123 Wine Lane, Wine Country</p>
+                        <p><i class="fas fa-envelope"></i> info@valleywineestate.com</p>
+                        <div class="business-contact">
+                            <p><i class="fas fa-phone"></i> (555) 123-4567</p>
+                            <button class="call-button">
+                                <i class="fas fa-phone"></i> Call
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="activity">
+            <div class="activity-image">
+                <img src="https://picsum.photos/seed/dance1/600/400" alt="Dance Class">
+            </div>
+            <div class="activity-details">
+                <time>7:30 PM</time>
+                <h3>Traditional Dance Workshop</h3>
+                <p>Learn traditional folk dances with local instructors and immerse yourself in the region's cultural heritage through movement and music.</p>
+                <p class="location"><i class="fas fa-map-marker-alt"></i> Cultural Dance Center</p>
+                <div class="activity-tags">
+                    <span class="tag cultural">Dance</span>
+                    <span class="tag activity">Workshop</span>
+                </div>
+                <div class="action-buttons">
+                    <div class="attendance-checkbox">
+                        <input type="checkbox" id="attended-activity-7" class="attendance-check">
+                        <label for="attended-activity-7">
+                            <i class="fas fa-check attendButton"></i> I went
+                        </label>
+                    </div>
+                    <button class="action-button reserve-button">
+                        <i class="fas fa-calendar-times"></i> Couldn't book
+                    </button>
+                    <button class="action-button report-button">
+                        <i class="fas fa-flag"></i> Report
+                    </button>
+                </div>
+                <div class="business-details">
+                    <h4>Business Information</h4>
+                    <div class="business-info">
+                        <p><i class="fas fa-building"></i> Cultural Dance Center</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 123 Dance Lane, Downtown District</p>
+                        <p><i class="fas fa-envelope"></i> info@culturedancecenter.com</p>
+                        <div class="business-contact">
+                            <p><i class="fas fa-phone"></i> (555) 901-2345</p>
+                            <button class="call-button">
+                                <i class="fas fa-phone"></i> Call
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="day-container">
+        <div class="day-header">
+            <div class="day-header-background">
+                <img src="assets/images/mountain.png" alt="Day 1 Background" class="day-header-image">
+            </div>
+            <h2>Day 3 - Wednesday, March 27</h2>
+        </div>
+        <div class="activity">
+            <div class="activity-image">
+                <img src="https://picsum.photos/seed/mountainadventure1/600/400" alt="Adventure">
+            </div>
+            <div class="activity-details">
+                <time>09:00 AM</time>
+                <h3>Mountain Adventure</h3>
+                <p>Experience the thrill of outdoor adventure with a guided mountain expedition. Includes hiking, scenic viewpoints, and wildlife spotting.</p>
+                <p class="location"><i class="fas fa-map-marker-alt"></i> Mountain Trail Center</p>
+                <div class="activity-tags">
+                    <span class="tag activity">Adventure</span>
+                    <span class="tag cultural">Nature</span>
+                </div>
+                <div class="action-buttons">
+                    <div class="attendance-checkbox">
+                        <input type="checkbox" id="attended-activity-8" class="attendance-check">
+                        <label for="attended-activity-8">
+                            <i class="fas fa-check attendButton"></i> I went
+                        </label>
+                    </div>
+                    <button class="action-button reserve-button">
+                        <i class="fas fa-calendar-times"></i> Couldn't book
+                    </button>
+                    <button class="action-button report-button">
+                        <i class="fas fa-flag"></i> Report
+                    </button>
+                </div>
+                <div class="business-details">
+                    <h4>Business Information</h4>
+                    <div class="business-info">
+                        <p><i class="fas fa-building"></i> Mountain Trail Center</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 123 Adventure Lane, Mountain District</p>
+                        <p><i class="fas fa-envelope"></i> info@mountainadventure.com</p>
+                        <div class="business-contact">
+                            <p><i class="fas fa-phone"></i> (555) 345-6789</p>
+                            <button class="call-button">
+                                <i class="fas fa-phone"></i> Call
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- New afternoon activities for Day 3 -->
+        <div class="activity">
+            <div class="activity-image">
+                <img src="https://picsum.photos/seed/spa1/600/400" alt="Spa Treatment">
+            </div>
+            <div class="activity-details">
+                <time>2:00 PM</time>
+                <h3>Mountain Spa Retreat</h3>
+                <p>Rejuvenate after your morning adventure with a luxurious spa treatment using local botanical ingredients and traditional healing techniques.</p>
+                <p class="location"><i class="fas fa-map-marker-alt"></i> Alpine Wellness Spa</p>
+                <div class="activity-tags">
+                    <span class="tag wellness">Spa</span>
+                    <span class="tag activity">Relaxation</span>
+                </div>
+                <div class="action-buttons">
+                    <div class="attendance-checkbox">
+                        <input type="checkbox" id="attended-activity-9" class="attendance-check">
+                        <label for="attended-activity-9">
+                            <i class="fas fa-check attendButton"></i> I went
+                        </label>
+                    </div>
+                    <button class="action-button reserve-button">
+                        <i class="fas fa-calendar-times"></i> Couldn't book
+                    </button>
+                    <button class="action-button report-button">
+                        <i class="fas fa-flag"></i> Report
+                    </button>
+                </div>
+                <div class="business-details">
+                    <h4>Business Information</h4>
+                    <div class="business-info">
+                        <p><i class="fas fa-building"></i> Alpine Wellness Spa</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 123 Spa Lane, Mountain District</p>
+                        <p><i class="fas fa-envelope"></i> info@alpinewellnessspa.com</p>
+                        <div class="business-contact">
+                            <p><i class="fas fa-phone"></i> (555) 567-8901</p>
+                            <button class="call-button">
+                                <i class="fas fa-phone"></i> Call
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="activity">
+            <div class="activity-image">
+                <img src="https://picsum.photos/seed/sunset1/600/400" alt="Sunset Dinner">
+            </div>
+            <div class="activity-details">
+                <time>6:30 PM</time>
+                <h3>Sunset Farewell Dinner</h3>
+                <p>Complete your journey with an unforgettable dining experience at a mountaintop restaurant, featuring panoramic views and a special tasting menu.</p>
+                <p class="location"><i class="fas fa-map-marker-alt"></i> Summit Restaurant</p>
+                <div class="activity-tags">
+                    <span class="tag food">Fine Dining</span>
+                    <span class="tag entertainment">Views</span>
+                </div>
+                <div class="action-buttons">
+                    <div class="attendance-checkbox">
+                        <input type="checkbox" id="attended-activity-10" class="attendance-check">
+                        <label for="attended-activity-10">
+                            <i class="fas fa-check attendButton"></i> I went
+                        </label>
+                    </div>
+                    <button class="action-button reserve-button">
+                        <i class="fas fa-calendar-times"></i> Couldn't book
+                    </button>
+                    <button class="action-button report-button">
+                        <i class="fas fa-flag"></i> Report
+                    </button>
+                </div>
+                <div class="business-details">
+                    <h4>Business Information</h4>
+                    <div class="business-info">
+                        <p><i class="fas fa-building"></i> Summit Restaurant</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 123 Mountain View Road, Mountain District</p>
+                        <p><i class="fas fa-envelope"></i> info@summitrestaurant.com</p>
+                        <div class="business-contact">
+                            <p><i class="fas fa-phone"></i> (555) 789-0123</p>
+                            <button class="call-button">
+                                <i class="fas fa-phone"></i> Call
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 ExploreAI. All rights reserved.</p>
+    </footer>
+
+    <script src="js/auth.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        window.addEventListener('load', function() {
+            const spinner = document.getElementById('loadingSpinner');
+            const content = document.getElementById('itineraryContent');
+            
+            setTimeout(() => {
+                spinner.style.display = 'none';
+                content.style.display = 'block';
+            }, 3000);
+        });
+
+        
+        // Add click handlers to all checkboxes
+        document.querySelectorAll('.attendance-check').forEach((checkbox) => {
+            
+        });
+    </script>
+
+    <!-- Add this modal HTML at the bottom of your body tag -->
+    <div id="mapModal" class="map-modal">
+        <div class="map-modal-content">
+            <span class="close-map">&times;</span>
+            <h3 id="mapLocationTitle"></h3>
+            <img id="mapImage" src="" alt="Location Map">
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const modal = document.getElementById('mapModal');
+        const modalTitle = document.getElementById('mapLocationTitle');
+        const mapImage = document.getElementById('mapImage');
+        const closeBtn = document.querySelector('.close-map');
+
+        // Update all location paragraphs to be clickable
+        document.querySelectorAll('.location').forEach(location => {
+            location.addEventListener('click', function() {
+                const locationText = this.textContent;
+                // You can create a mapping of locations to specific map images
+                // For now, using a placeholder image
+                const mapUrl = `assets/images/map-ui.png`;
+                
+                modalTitle.textContent = locationText;
+                mapImage.src = mapUrl;
+                modal.style.display = 'block';
+                // Trigger reflow
+                modal.offsetHeight;
+                modal.classList.add('show');
+            });
+        });
+
+        // Close modal when clicking the close button or outside the modal
+        closeBtn.onclick = function() {
+            closeModal();
+        }
+
+        modal.onclick = function(event) {
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        function closeModal() {
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+        }
+
+        // Close on escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && modal.style.display === 'block') {
+                closeModal();
+            }
+        });
+    });
+    </script>
+
+    <!-- Add this right after the <main> tag opens -->
+    <button class="sidebar-toggle">
+        <i class="fas fa-info-circle"></i> Local Guide
+    </button>
+
+    <div class="cultural-sidebar">
+        <div class="ai-assistant-card">
+            <h3>🤖 Travel Assistant</h3>
+            <div class="ai-chat-container">
+                <p>Ask me anything about French culture, customs, or travel tips!</p>
+                <div class="ai-input-container">
+                    <input type="text" 
+                           class="ai-input" 
+                           placeholder="e.g., What's the best time to visit the Eiffel Tower?"
+                           aria-label="Ask a question">
+                    <button class="ai-submit">
+                        <i class="fas fa-paper-plane"></i>
+                        Ask
+                    </button>
+                </div>
+                <div class="example-questions">
+                    <p>Try asking:</p>
+                    <span class="example-question">Best time to visit Paris?</span>
+                    <span class="example-question">Metro tips?</span>
+                    <span class="example-question">Restaurant etiquette?</span>
+                </div>
+                <div class="ai-thinking">Thinking...</div>
+                <div class="ai-response"></div>
+            </div>
+        </div>
+        
+        <div class="custom-card">
+            <h3>🎨 French Customs & Etiquette</h3>
+            <ul class="customs-list">
+                <li>Always greet with "Bonjour" before starting any conversation - even in shops!</li>
+                <li>The French take their mealtimes seriously - lunch is typically 12-2pm</li>
+                <li>Don't eat while walking - meals are meant to be enjoyed seated</li>
+                <li>Dress smartly in cities - casual sportswear is for sports only</li>
+                <li>Always say "Au revoir" when leaving a shop or restaurant</li>
+                <li>Tipping is not required but appreciated (5-10% is fine)</li>
+            </ul>
+        </div>
+
+        <div class="custom-card">
+            <h3>💬 Essential French Phrases</h3>
+            <div class="phrase-list">
+                <div class="phrase-item">
+                    <div class="french">Bonjour!</div>
+                    <div class="pronunciation">bohn-ZHOOR</div>
+                    <div class="english">Hello!</div>
+                </div>
+                <div class="phrase-item">
+                    <div class="french">S'il vous plaît</div>
+                    <div class="pronunciation">seel voo PLEH</div>
+                    <div class="english">Please</div>
+                </div>
+                <div class="phrase-item">
+                    <div class="french">Merci beaucoup</div>
+                    <div class="pronunciation">mehr-see boh-KOO</div>
+                    <div class="english">Thank you very much</div>
+                </div>
+                <div class="phrase-item">
+                    <div class="french">Parlez-vous anglais?</div>
+                    <div class="pronunciation">par-lay VOO ahn-GLEH?</div>
+                    <div class="english">Do you speak English?</div>
+                </div>
+                <div class="phrase-item">
+                    <div class="french">L'addition, s'il vous plaît</div>
+                    <div class="pronunciation">lad-ee-see-OHN seel voo PLEH</div>
+                    <div class="english">The bill, please</div>
+                </div>
+                <div class="phrase-item">
+                    <div class="french">Où sont les toilettes?</div>
+                    <div class="pronunciation">oo sohn lay twah-LET?</div>
+                    <div class="english">Where are the restrooms?</div>
+                </div>
+            </div>
+        </div>
+
+       
+    </div>
+
+    <!-- Add this script before the closing </body> tag -->
+    <script>
+        document.querySelector('.sidebar-toggle').addEventListener('click', function() {
+            document.querySelector('.cultural-sidebar').classList.toggle('open');
+        });
+
+
+        // Close sidebar when clicking outside
+        document.addEventListener('click', function(event) {
+            const sidebar = document.querySelector('.cultural-sidebar');
+            const toggle = document.querySelector('.sidebar-toggle');
+            
+            if (!sidebar.contains(event.target) && !toggle.contains(event.target) && sidebar.classList.contains('open')) {
+                sidebar.classList.remove('open');
+            }
+        });
+    </script>
+
+    <!-- Update the script section for the AI assistant -->
+    <script>
+        const franceResponses = [
+            "Based on my knowledge of French culture, I'd recommend starting your day with a visit to a local boulangerie around 8 AM. The French take their bread very seriously, and the morning is when you'll find the freshest baguettes and croissants. Pro tip: If you hear locals asking for a 'baguette bien cuite,' they're requesting a well-done, crispier baguette! 🥖",
+            
+            "Let me share an interesting cultural insight: In France, it's considered polite to say 'Bonjour' before asking any question or entering any shop. This simple greeting sets the tone for all interactions. Even if you don't speak French, this one word can make a significant difference in how locals receive you. Think of it as the 'magic key' to French social interactions! 🇫🇷",
+            
+            "From my analysis of French dining customs, the most important thing to remember is that dinner typically starts around 7:30-8:00 PM. If you arrive at a restaurant at 6 PM, you might find it closed or empty! This later dining time is part of the French lifestyle that prioritizes taking time to enjoy meals. I suggest adjusting your schedule accordingly. 🍽️",
+            
+            "Here's something many tourists don't realize: French museums are often free on the first Sunday of each month. Additionally, if you're under 26 and from the EU, many museums are free year-round. I recommend planning your cultural visits around these dates to maximize your experience while minimizing costs. 🎨",
+            
+            "When it comes to French wine etiquette, I can tell you that it's customary to wait until everyone at the table has been served and someone says 'Santé!' (cheers) before taking your first sip. Also, make sure to maintain eye contact while clinking glasses - the French consider it bad luck not to do so! 🍷",
+            
+            "Based on local transportation data, I suggest avoiding the Paris Metro during rush hours (8:30-9:30 AM and 6:00-7:00 PM). Instead, consider walking or using Vélib' (bike-sharing system) during these times. Paris is actually smaller than many people think, and walking between attractions often reveals hidden gems! 🚶‍♂️",
+            
+            "An interesting cultural note: The French take their meal times very seriously. If you're invited to someone's home for dinner, arriving 10-15 minutes late is actually preferred! Being exactly on time or early might catch your host off guard. However, this rule doesn't apply to restaurants or business meetings. ⏰",
+            
+            "Shopping tip: Many smaller shops in France close for lunch (usually 12:00-2:00 PM) and are closed on Sundays. However, larger stores in tourist areas may stay open. I recommend checking opening hours in advance and planning your shopping around these times. Also, the word 'Soldes' (sales) is only legal during official sale periods! 🛍️",
+            
+            "Here's a local secret: To find the best French cheese shops (fromageries), look for the ones with the 'Meilleur Ouvrier de France' sign - it's a blue, white, and red striped collar that indicates exceptional craftsmanship. These shops often offer tastings and can help you create the perfect cheese plate! 🧀",
+            
+            "Did you know? French café culture has specific unwritten rules. If you sit at a table, you'll pay more than if you stand at the bar. Also, coffee is typically consumed after dessert, not with it. For the most authentic experience, try ordering 'un café' (espresso) and enjoying it while standing at the bar like locals do! ☕"
+        ];
+
+        const aiInput = document.querySelector('.ai-input');
+        const aiSubmit = document.querySelector('.ai-submit');
+        const aiThinking = document.querySelector('.ai-thinking');
+        const aiResponse = document.querySelector('.ai-response');
+        const exampleQuestions = document.querySelectorAll('.example-question');
+
+        function getRandomResponse() {
+            return franceResponses[Math.floor(Math.random() * franceResponses.length)];
+        }
+
+        function showResponse(question) {
+            // Show thinking state
+            aiThinking.style.display = 'block';
+            aiResponse.classList.remove('show');
+            
+            // Clear previous response
+            aiResponse.textContent = '';
+            
+            // Simulate AI thinking time (random between 1-2 seconds)
+            setTimeout(() => {
+                aiThinking.style.display = 'none';
+                
+                // Create typing effect
+                const response = getRandomResponse();
+                let i = 0;
+                const typeEffect = setInterval(() => {
+                    if (i < response.length) {
+                        aiResponse.textContent += response.charAt(i);
+                        i++;
+                    } else {
+                        clearInterval(typeEffect);
+                    }
+                }, 15); // Adjust typing speed here
+                
+                aiResponse.classList.add('show');
+            }, Math.random() * 1000 + 1000);
+        }
+
+        aiSubmit.addEventListener('click', () => {
+            if (aiInput.value.trim()) {
+                showResponse(aiInput.value);
+                // Clear input after sending
+                aiInput.value = '';
+            }
+        });
+
+        aiInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && aiInput.value.trim()) {
+                showResponse(aiInput.value);
+                // Clear input after sending
+                aiInput.value = '';
+            }
+        });
+
+        exampleQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                aiInput.value = question.textContent;
+                showResponse(question.textContent);
+                // Clear input after sending
+                aiInput.value = '';
+            });
+        });
+    </script>
+</body>
+</html>

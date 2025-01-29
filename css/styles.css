@@ -1,0 +1,1106 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 70px; /* Adjust based on your nav height */
+}
+
+/* Navigation */
+.main-nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 1rem 2rem;
+    background: rgba(255, 255, 255, 0.95);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.main-nav ul {
+    display: flex;
+    list-style: none;
+}
+
+.main-nav ul li a {
+    text-decoration: none;
+    color: #2c3e50;
+    padding: 0.5rem 1rem;
+    margin: 0 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.main-nav ul li a:hover {
+    color: #3498db;
+}
+
+/* Hero Section */
+.hero {
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-slideshow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.hero-slideshow img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.hero-slideshow img.active {
+    opacity: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding: 2rem;
+    background: rgba(0,0,0,0.3);
+}
+
+.hero-content h1 {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.hero-content h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    transition: background 0.3s ease;
+}
+
+.cta-button:hover {
+    background: #2980b9;
+}
+
+/* Main Content */
+main {
+    padding: 4rem 2rem;
+    min-height: 100vh;
+}
+
+.intro {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Footer */
+footer {
+    background: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Add these new styles to your existing CSS file */
+
+/* Feature Grid */
+.features {
+    padding: 4rem 2rem;
+    background: #f9f9f9;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.feature-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Cultural Passport Section */
+.cultural-passport-preview {
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e8edf5 100%);
+    text-align: center;
+    width: 100%;
+    overflow: hidden;
+}
+
+.passport-intro {
+    max-width: 800px;
+    margin: 1.5rem auto;
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.6;
+    padding: 0 1rem;
+}
+
+.passport-container {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 3rem auto;
+    align-items: start;
+    padding: 0 1rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.badges-preview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.preview-badge {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    position: relative;
+}
+
+.preview-badge:hover {
+    transform: translateY(-5px);
+}
+
+.preview-badge img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 1rem;
+}
+.badge img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 1rem;
+}
+.badge-title {
+    font-weight: bold;
+    margin: 0.5rem 0;
+    color: #333;
+}
+
+.badge-desc {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 0.5rem;
+}
+
+.preview-badge.locked {
+    background: #f5f5f5;
+    opacity: 0.8;
+}
+
+.preview-badge.locked img {
+    filter: grayscale(1);
+}
+
+.passport-info {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.passport-steps {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+}
+
+.passport-steps li {
+    display: flex;
+    align-items: center;
+    margin: 1rem 0;
+    text-align: left;
+}
+
+.step-icon {
+    font-size: 1.5rem;
+    margin-right: 1rem;
+    background: #f0f4f8;
+    padding: 0.5rem;
+    border-radius: 50%;
+    min-width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.step-text {
+    flex: 1;
+    line-height: 1.4;
+}
+
+/* Traveller Tags */
+.traveller-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    justify-content: center;
+}
+
+.tag {
+    padding: 0.8rem 1.4rem;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    border: 2px solid transparent;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* Tag color variations */
+.tag.nature { background: #e8f5e9; color: #2e7d32; }
+.tag.culture { background: #fff3e0; color: #e65100; }
+.tag.adventure { background: #e3f2fd; color: #1565c0; }
+.tag.lifestyle { background: #f3e5f5; color: #7b1fa2; }
+.tag.quirky { background: #fff8e1; color: #ff8f00; }
+
+.tag:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    filter: brightness(0.95);
+}
+
+.tag-input:checked + .tag {
+    color: white;
+    font-weight: 500;
+}
+
+.tag-input:checked + .tag.nature { background: #2e7d32; }
+.tag-input:checked + .tag.culture { background: #e65100; }
+.tag-input:checked + .tag.adventure { background: #1565c0; }
+.tag-input:checked + .tag.lifestyle { background: #7b1fa2; }
+.tag-input:checked + .tag.quirky { background: #ff8f00; }
+
+/* Responsive adjustments */
+@media (max-width: 968px) {
+    .passport-container {
+        grid-template-columns: 1fr;
+        padding: 0;
+    }
+    
+    .badges-preview {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+
+    .badge {
+        padding: 1rem;
+    }
+
+    .passport-info {
+        margin: 0 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .cultural-passport-preview {
+        padding: 2rem 1rem;
+    }
+
+    .badges-preview {
+        grid-template-columns: 1fr;
+    }
+
+    .badge img {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+/* Updated CTA Buttons */
+.cta-container {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.cta-button.primary {
+    background: #3498db;
+}
+
+.cta-button.secondary {
+    background: transparent;
+    border: 2px solid white;
+}
+
+.cta-button.secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Enhanced Footer */
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.footer-section h3 {
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-section ul li a {
+    color: #ffffff80;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+    color: white;
+}
+
+.social-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.social-icon {
+    font-size: 1.5rem;
+    color: white;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.social-icon:hover {
+    transform: scale(1.1);
+}
+
+.footer-bottom {
+    border-top: 1px solid #ffffff20;
+    padding-top: 1rem;
+    margin-top: 2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-content h2 {
+        font-size: 1.2rem;
+    }
+
+    .cta-container {
+        flex-direction: column;
+    }
+
+    .badges-preview {
+        gap: 1rem;
+    }
+}
+/* Auth Button Styles */
+.auth-button {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.auth-button:hover {
+    background: #2980b9;
+}
+
+.auth-button.logged-in {
+    background: #e74c3c;
+}
+
+.auth-button.logged-in:hover {
+    background: #c0392b;
+}
+
+/* Hidden class for auth-required items */
+.hidden {
+    display: none !important;
+}
+
+/* Profile Dropdown */
+.profile-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.profile-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    min-width: 200px;
+    padding: 8px 0;
+    display: none;
+    z-index: 1000;
+}
+
+.profile-menu.active {
+    display: block;
+}
+
+.profile-menu a {
+    display: block;
+    padding: 8px 16px;
+    color: #333;
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+
+.profile-menu a:hover {
+    background: #f5f5f5;
+}
+/* Notification Styles */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    background: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transform: translateX(120%);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+}
+
+.notification.show {
+    transform: translateX(0);
+}
+
+.notification.success {
+    background: #2ecc71;
+    color: white;
+}
+
+.notification.info {
+    background: #3498db;
+    color: white;
+}
+
+.notification.error {
+    background: #e74c3c;
+    color: white;
+}
+/* Add these mobile nav styles to your existing CSS */
+.nav-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100vw;
+}
+
+/* Hamburger Menu Button */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    position: relative;
+    z-index: 1001;
+}
+
+.hamburger,
+.hamburger::before,
+.hamburger::after {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: #2c3e50;
+    position: absolute;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.hamburger {
+    position: relative;
+}
+
+.hamburger::before {
+    content: '';
+    top: -8px;
+}
+
+.hamburger::after {
+    content: '';
+    bottom: -8px;
+}
+/* Mobile Menu Overlay */
+.nav-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 998;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -300px;
+        width: 300px;
+        height: 100vh;
+        background: white;
+        padding: 5rem 2rem 2rem;
+        z-index: 999;
+        transition: right 0.3s ease;
+        overflow-y: auto;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 1.5rem;
+        align-items: flex-start;
+    }
+
+    /* Menu Open States */
+    body.menu-open {
+        overflow: hidden;
+    }
+
+    body.menu-open .nav-menu {
+        right: 0;
+        box-shadow: -2px 0 8px rgba(0,0,0,0.1);
+    }
+
+    body.menu-open .nav-overlay {
+        display: block;
+        opacity: 1;
+    }
+
+    body.menu-open .hamburger {
+        background: transparent;
+    }
+
+    body.menu-open .hamburger::before {
+        transform: rotate(45deg);
+        top: 0;
+    }
+
+    body.menu-open .hamburger::after {
+        transform: rotate(-45deg);
+        bottom: 0;
+    }
+
+    /* Adjust auth button in mobile menu */
+    .auth-button {
+        width: 100%;
+        margin-top: 1rem;
+    }
+
+    /* Add some spacing for the content below fixed nav */
+    body {
+        padding-top: 60px;
+    }
+}
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+}
+
+.itinerary-spinner {
+    margin-top:60px;
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin-bottom: 25px;
+}
+
+.spinner-border {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 3px solid #4CAF50;  /* Primary green from your theme */
+    border-radius: 50%;
+    animation: spin 2s linear infinite;
+}
+
+.spinner-border::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    border: 3px solid transparent;
+    border-top-color: #388E3C;  /* Darker green accent */
+    border-radius: 50%;
+    animation: spin 1.5s linear infinite;
+}
+
+.spinner-inner {
+    position: absolute;
+    width: 70%;
+    height: 70%;
+    top: 15%;
+    left: 15%;
+    background: #f8f9fa;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #4CAF50;
+}
+
+.spinner-inner i {
+    font-size: 24px;
+    color: #4CAF50;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.loading-text {
+    font-size: 1.2rem;
+    color: #2c3e50;
+    margin-top: 25px;
+    font-weight: 500;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.itinerary-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    margin-top:40px;
+}
+
+.itinerary-header {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #2c3e50;
+    position: relative;
+    padding: 20px;
+    background: linear-gradient(135deg, #3498db, #2ecc71);
+    border-radius: 12px;
+    color: white;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.itinerary-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.itinerary-header p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.day-container {
+    margin-bottom: 60px;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.day-header {
+    background: linear-gradient(135deg, #3498db, #2ecc71);
+    margin: -30px -30px 30px -30px;
+    padding: 20px;
+    border-radius: 15px 15px 0 0;
+    color: white;
+    text-align: center;
+}
+
+.activity {
+    display: flex;
+    margin: 30px 0;
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+.activity:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.activity-image {
+    width: 200px;
+    min-width: 200px;
+    height: 150px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-right: 20px;
+}
+
+.activity-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.activity:hover .activity-image img {
+    transform: scale(1.1);
+}
+
+time {
+    min-width: 120px;
+    font-weight: bold;
+    color: #3498db;
+    font-size: 1.1rem;
+    padding: 8px 15px;
+    background: rgba(52, 152, 219, 0.1);
+    border-radius: 20px;
+    text-align: center;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.activity-details {
+    flex-grow: 1;
+}
+
+.activity-details h3 {
+    margin: 0 0 12px 0;
+    color: #2c3e50;
+    font-size: 1.4rem;
+}
+
+.activity-details p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.location {
+    color: #666;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+}
+
+.location i {
+    color: #e74c3c;
+    margin-right: 5px;
+}
+
+
+.activity-tags .tag {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    height: 22px !important;
+    max-height: 22px;
+}
+
+.activity-tags .tag.cultural {
+    background: rgba(231, 76, 60, 0.1);
+    color: #e74c3c;
+}
+
+.activity-tags .tag.food {
+    background: rgba(46, 204, 113, 0.1);
+    color: #27ae60;
+}
+
+.activity-tags .tag.activity {
+    background: rgba(52, 152, 219, 0.1);
+    color: #2980b9;
+}
+
+@media (max-width: 768px) {
+    .activity {
+        flex-direction: column;
+    }
+    
+    .activity-image {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+    
+    time {
+        margin-bottom: 15px;
+    }
+}
+
+.passport-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    margin-top: 60px;
+    padding: 0 20px;
+}
+
+.profile-section {
+    background: linear-gradient(135deg, #3498db, #2ecc71);
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 40px;
+    color: white;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid white;
+}
+
+.profile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-info h1 {
+    margin: 0 0 15px 0;
+    font-size: 2.2rem;
+}
+
+.points-display {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+}
+
+.points-display i {
+    color: #ffd700;
+    margin-right: 10px;
+}
+
+.rank {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+.badges-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    width: 100%;
+}
+
+.badge {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.badge.locked {
+    opacity: 0.4;
+}
+.badge.locked .badge-icon > img {
+    filter: grayscale(100%)
+}
+
+.badge-icon {
+    width: 50px;
+    height: 50px;
+    background: #f8f9fa;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.achieved .badge-icon {
+    background: #e8f5e9;
+    color: #2ecc71;
+}
+
+.locked .badge-icon {
+    background: #f5f5f5;
+    color: #95a5a6;
+}
+
+.badge-content {
+    flex-grow: 1;
+    min-width: 0; /* Allows content to shrink below its minimum content size */
+}
+
+.badge-content h3 {
+    margin: 0 0 10px 0;
+    color: #2c3e50;
+    font-size: 1.2rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.points-value,
+.achievement-date,
+.requirements {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+@media (max-width: 768px) {
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .profile-image {
+        margin: 0 auto;
+    }
+    
+    .badge {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .badge-icon {
+        margin-bottom: 15px;
+    }
+
+    .badges-grid {
+        grid-template-columns: 1fr; /* Single column on mobile */
+    }
+}
+.day-header {
+    position: relative;
+    overflow: hidden;
+}
+.day-header-background {
+    position: absolute;
+    top: 0;
+    left: 0; /* Changed from right to left */
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+.day-header-image {
+    width: 200px;
+    height: 100%;
+    object-fit: cover;
+    float: right; /* Added to move image to right */
+    mask-image: linear-gradient(to right, transparent, rgba(0,0,0,1) 30%); /* Changed direction */
+    -webkit-mask-image: linear-gradient(to right, transparent, rgba(0,0,0,1) 30%); /* Changed direction */
+    opacity: 0.15;
+}
+.day-header h2 {
+    position: relative;
+    z-index: 2;
+}

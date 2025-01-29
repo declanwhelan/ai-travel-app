@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExploreAI - Your Adventure, Your Way</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="nav-content">
+            <div class="logo">ExploreAI</div>
+            
+            <!-- Add hamburger button -->
+            <button class="menu-toggle" aria-label="Toggle menu">
+                <span class="hamburger"></span>
+            </button>
+    
+            <!-- Wrap existing nav-links in a nav-menu div -->
+            <div class="nav-menu">
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="preferences.html">Plan Your Journey</a></li>
+                    <li class="auth-required hidden"><a href="itinerary.html">Your Itinerary</a></li>
+                    <li class="auth-required hidden"><a href="cultural-passport.html" id="culturalPassport">Cultural Passport</a></li>
+                    <li class="auth-required hidden"><a href="profile.html" id="profile">Profile</a></li>
+                    <li class="auth-item">
+                        <button id="authButton" class="auth-button">Log In</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="nav-overlay"></div>
+
+    <header class="hero">
+        <div class="hero-slideshow" id="slideshow">
+            <!-- Images will be inserted here via JavaScript -->
+        </div>
+        <div class="hero-content">
+            <h1>Your Adventure, Your Way</h1>
+            <h2>Explore the world on your terms with personalized itineraries, real-time insights, and cultural tips—your ultimate travel companion.</h2>
+            <div class="cta-container">
+                <a href="preferences.html" class="cta-button primary">Start Planning</a>
+                <a href="#features" class="cta-button secondary">Learn More</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="features" class="features">
+            <h2>Why Travel with ExploreAI?</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Personalized Journeys</h3>
+                    <p>Tailored itineraries that match your unique travel style and preferences.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Cultural Immersion</h3>
+                    <p>Deep dive into local cultures with our interactive Cultural Passport system.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🚆</div>
+                    <h3>Transport Made Easy</h3>
+                    <p>Navigate like a local with confidence using our transport recommendations.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💫</div>
+                    <h3>Real-Time Insights</h3>
+                    <p>Stay informed with up-to-date local information and travel tips.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="explore-ar">
+            <div class="coming-soon-banner">
+                <span>Coming Soon</span>
+            </div>
+            
+            <div class="ar-content">
+                <div class="ar-text">
+                    <h2>ExploreAR</h2>
+                    <p class="ar-tagline">Your World, Enhanced</p>
+                    <p class="ar-description">
+                        Get ready to experience travel like never before with ExploreAR, 
+                        our upcoming augmented reality travel companion. Simply point your 
+                        phone at your surroundings to unlock:
+                    </p>
+                    <ul class="ar-features">
+                        <li>
+                            <i class="fas fa-info-circle"></i>
+                            Real-time historical insights and cultural context
+                        </li>
+                        <li>
+                            <i class="fas fa-utensils"></i>
+                            Local food recommendations with authentic dishes to try
+                        </li>
+                        <li>
+                            <i class="fas fa-route"></i>
+                            Hidden gems and off-the-beaten-path experiences
+                        </li>
+                        <li>
+                            <i class="fas fa-language"></i>
+                            Instant translation of signs and menus
+                        </li>
+                    </ul>
+                    <button class="notify-button">
+                        <i class="fas fa-bell"></i>
+                        Notify me when it's ready
+                    </button>
+                </div>
+                <div class="ar-image">
+                    <img src="assets/images/AR.png" alt="ExploreAR Preview">
+                    <div class="ar-overlay">
+                        <div class="pulse-dot"></div>
+                        <div class="pulse-dot"></div>
+                        <div class="pulse-dot"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cultural-passport-preview">
+            <h2>Unlock Your Cultural Passport</h2>
+            <p class="passport-intro">Collect unique badges as you explore and grow your cultural understanding. Each badge represents mastery in different aspects of travel and cultural immersion.</p>
+            
+            <div class="passport-container">
+                <div class="badges-preview">
+                    <div class="preview-badge">
+                        <img src="assets/images/badge-street-food.png" alt="Street Food Explorer Badge">
+                        <p class="badge-title">Street Food Explorer</p>
+                        <p class="badge-desc">Sample 10 local street foods and learn their cultural significance</p>
+                    </div>
+                    <div class="preview-badge">
+                        <img src="assets/images/local-transport.webp" alt="Transport Navigator Badge">
+                        <p class="badge-title">Transport Navigator</p>
+                        <p class="badge-desc">Master 5 different local transport systems</p>
+                    </div>
+                    <div class="preview-badge">
+                        <img src="assets/images/language-explorer.webp" alt="Language Enthusiast Badge">
+                        <p class="badge-title">Language Enthusiast</p>
+                        <p class="badge-desc">Learn and use 50 local phrases</p>
+                    </div>
+                    <div class="preview-badge locked">
+                        <img src="assets/images/badge-locked.webp" alt="Locked Badge">
+                        <p class="badge-title">??? Badge</p>
+                        <p class="badge-desc">Keep exploring to unlock more achievements!</p>
+                    </div>
+                </div>
+
+                <div class="passport-info">
+                    <div class="info-card">
+                        <h3>How It Works</h3>
+                        <ol class="passport-steps">
+                            <li>
+                                <span class="step-icon">🎯</span>
+                                <span class="step-text">Complete cultural challenges during your travels</span>
+                            </li>
+                            <li>
+                                <span class="step-icon">🏆</span>
+                                <span class="step-text">Earn badges for your achievements</span>
+                            </li>
+                            <li>
+                                <span class="step-icon">📈</span>
+                                <span class="step-text">Level up your traveler profile</span>
+                            </li>
+                            <li>
+                                <span class="step-icon">🎁</span>
+                                <span class="step-text">Unlock exclusive travel tips and recommendations</span>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <a href="#" class="cta-button">Start Your Collection</a>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>ExploreAI</h3>
+                <p>Your ultimate companion for independent travel.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="preferences.html">Plan Your Trip</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#" id="culturalPassportFooter">Cultural Passport</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <div class="social-links">
+                    <a href="#" class="social-icon">📱</a>
+                    <a href="#" class="social-icon">📸</a>
+                    <a href="#" class="social-icon">🐦</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 ExploreAI. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/auth.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
+
+<style>
+    .explore-ar {
+        position: relative;
+        background: linear-gradient(135deg, #1a237e 0%, #0d47a1 100%);
+        color: white;
+        padding: 4rem 2rem;
+        overflow: hidden;
+        margin: 4rem 0;
+    }
+
+    .coming-soon-banner {
+        position: absolute;
+        top: 30px;
+        right: -35px;
+        transform: rotate(45deg);
+        background: #ffd700;
+        padding: 8px 40px;
+        color: #000;
+        font-weight: bold;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+    .ar-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        align-items: center;
+    }
+
+    .ar-tagline {
+        font-size: 1.5rem;
+        margin: 1rem 0;
+        color: #90caf9;
+    }
+
+    .ar-description {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+    }
+
+    .ar-features {
+        list-style: none;
+        padding: 0;
+        margin: 2rem 0;
+    }
+
+    .ar-features li {
+        margin: 1rem 0;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .ar-features i {
+        color: #90caf9;
+        font-size: 1.2rem;
+    }
+
+    .notify-button {
+        background: #ffd700;
+        color: #000;
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: 25px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .notify-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .ar-image {
+        position: relative;
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    .ar-image img {
+        width: 100%;
+        height: auto;
+        border-radius: 12px;
+    }
+
+    .ar-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(26, 35, 126, 0.2);
+    }
+
+    .pulse-dot {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background: #ffd700;
+        border-radius: 50%;
+        animation: pulse 2s infinite;
+    }
+
+    .pulse-dot:nth-child(1) { top: 30%; left: 20%; }
+    .pulse-dot:nth-child(2) { top: 50%; left: 60%; }
+    .pulse-dot:nth-child(3) { top: 70%; left: 40%; }
+
+    @keyframes pulse {
+        0% {
+            transform: scale(1);
+            opacity: 1;
+        }
+        50% {
+            transform: scale(1.5);
+            opacity: 0.5;
+        }
+        100% {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .ar-content {
+            grid-template-columns: 1fr;
+        }
+        
+        .explore-ar {
+            padding: 2rem;
+        }
+    }
+</style>
+
+<script>
+    // Add notification functionality
+    document.querySelector('.notify-button').addEventListener('click', function() {
+        this.innerHTML = '<i class="fas fa-check"></i> We\'ll keep you posted!';
+        this.style.background = '#4CAF50';
+        this.style.color = 'white';
+        this.disabled = true;
+    });
+</script>

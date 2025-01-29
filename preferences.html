@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan Your Journey - ExploreAI</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/preferences.css">
+    <!-- Add Flatpickr for date picking -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="nav-content">
+            <div class="logo">ExploreAI</div>
+            
+            <!-- Add hamburger button -->
+            <button class="menu-toggle" aria-label="Toggle menu">
+                <span class="hamburger"></span>
+            </button>
+    
+            <!-- Wrap existing nav-links in a nav-menu div -->
+            <div class="nav-menu">
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="preferences.html">Plan Your Journey</a></li>
+                    <li class="auth-required hidden"><a href="itinerary.html">Your Itinerary</a></li>
+                    <li class="auth-required hidden"><a href="cultural-passport.html" id="culturalPassport">Cultural Passport</a></li>
+                    <li class="auth-required hidden"><a href="profile.html" id="profile">Profile</a></li>
+                    <li class="auth-item">
+                        <button id="authButton" class="auth-button">Log In</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="nav-overlay"></div>
+    
+    <main class="preferences-container">
+        <div class="preferences-header">
+            <h1>Design Your Perfect Journey</h1>
+            <p class="subtitle">Tell us about your travel style, and we'll create your ideal itinerary.</p>
+        </div>
+
+        <form id="preferencesForm" class="preferences-form">
+            <!-- Progress indicator -->
+            <div class="progress-container">
+                <div class="progress-steps">
+                    <div class="step active">1. Destination</div>
+                    <div class="step">2. Interests</div>
+                    <div class="step">3. Style</div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress" id="formProgress"></div>
+                </div>
+            </div>
+
+            <!-- Section 1: Destination and Dates -->
+            <section class="form-section active" data-section="1">
+                <div class="section-header">
+                    <h2><span class="section-icon">📍</span> Where & When</h2>
+                </div>
+                <div class="form-group">
+                    <label for="destination">Where are you traveling?</label>
+                    <div class="destination-input-container">
+                        <input 
+                            type="text" 
+                            id="destination" 
+                            class="destination-input" 
+                            placeholder="Enter city or country"
+                            autocomplete="off"
+                        >
+                    </div>
+                </div>
+
+                <div class="form-group date-group">
+                    <label>When are you planning to travel?</label>
+                    <div class="date-inputs">
+                        <input type="text" id="startDate" placeholder="Start Date">
+                        <input type="text" id="endDate" placeholder="End Date">
+                    </div>
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="flexibleDates">
+                        <span class="checkmark"></span>
+                        I'm flexible with dates
+                    </label>
+                </div>
+            </section>
+
+            <!-- Replace the existing interests-grid div with this updated version -->
+<section class="form-section" data-section="2">
+    <div class="section-header">
+        <h2><span class="section-icon">🎯</span> Interests & Activities</h2>
+    </div>
+    <p class="section-desc">Select all that interest you. This helps us personalize your itinerary.</p>
+    
+    <div class="interests-grid">
+        <div class="interest-item" style="background-image: url('https://picsum.photos/400/300?food')">
+            <label class="checkbox-container">
+                <input type="checkbox" name="interests" value="food">
+                <div class="interest-content">
+                    <h3>Food & Drinks</h3>
+                    <span class="interest-desc">Local cuisine, food tours, cooking classes</span>
+                </div>
+            </label>
+        </div>
+    
+        <div class="interest-item" style="background-image: url('https://picsum.photos/400/300?art')">
+            <label class="checkbox-container">
+                <input type="checkbox" name="interests" value="culture">
+                <div class="interest-content">
+                    <h3>Arts & Culture</h3>
+                    <span class="interest-desc">Museums, galleries, historical sites</span>
+                </div>
+            </label>
+        </div>
+    
+        <div class="interest-item" style="background-image: url('https://picsum.photos/400/300?nature')">
+            <label class="checkbox-container">
+                <input type="checkbox" name="interests" value="nature">
+                <div class="interest-content">
+                    <h3>Nature & Outdoors</h3>
+                    <span class="interest-desc">Hiking, parks, scenic views</span>
+                </div>
+            </label>
+        </div>
+    
+        <div class="interest-item" style="background-image: url('https://picsum.photos/400/300?adventure')">
+            <label class="checkbox-container">
+                <input type="checkbox" name="interests" value="adventure">
+                <div class="interest-content">
+                    <h3>Adventure</h3>
+                    <span class="interest-desc">Extreme sports, thrilling activities</span>
+                </div>
+            </label>
+        </div>
+    
+        <div class="interest-item" style="background-image: url('https://picsum.photos/400/300?night')">
+            <label class="checkbox-container">
+                <input type="checkbox" name="interests" value="nightlife">
+                <div class="interest-content">
+                    <h3>Nightlife</h3>
+                    <span class="interest-desc">Bars, clubs, live music venues</span>
+                </div>
+            </label>
+        </div>
+        <div class="interest-item" style="background-image: url('https://picsum.photos/400/300?shopping')">
+            <label class="checkbox-container">
+                <input type="checkbox" name="interests" value="shopping">
+                <div class="interest-content">
+                    <h3>Shopping</h3>
+                    <span class="interest-desc">Markets, boutiques, local crafts</span>
+                </div>
+            </label>
+        </div>
+        <div class="interest-item" style="background-image: url('https://picsum.photos/400/300?relaxation')">
+            <label class="checkbox-container">
+                <input type="checkbox" name="interests" value="relaxation">
+                <div class="interest-content">
+                    <h3>Relaxation</h3>
+                    <span class="interest-desc">Beaches, spas, peaceful spots</span>
+                </div>
+            </label>
+        </div>
+        <div class="interest-item" style="background-image: url('https://picsum.photos/400/300?local-life')">
+            <label class="checkbox-container">
+                <input type="checkbox" name="interests" value="local-life">
+                <div class="interest-content">
+                    <h3>Local Life</h3>
+                    <span class="interest-desc">Off-beaten path, authentic experiences</span>
+                </div>
+            </label>
+        </div>
+        <div class="interest-item" style="background-image: url('https://picsum.photos/400/300?photography')">
+            <label class="checkbox-container">
+                <input type="checkbox" name="interests" value="photography">
+                <div class="interest-content">
+                    <h3>Photography</h3>
+                    <span class="interest-desc">Scenic spots, photo opportunities</span>
+                </div>
+            </label>
+        </div>
+        <div class="interest-item" style="background-image: url('https://picsum.photos/400/300?festivals')">
+            <label class="checkbox-container">
+                <input type="checkbox" name="interests" value="festivals">
+                <div class="interest-content">
+                    <h3>Festivals & Events</h3>
+                    <span class="interest-desc">Local celebrations, seasonal events</span>
+                </div>
+            </label>
+        </div>
+        <div class="interest-item" style="background-image: url('https://picsum.photos/400/300?wellness')">
+            <label class="checkbox-container">
+                <input type="checkbox" name="interests" value="wellness">
+                <div class="interest-content">
+                    <h3>Wellness</h3>
+                    <span class="interest-desc">Yoga, meditation, healthy living</span>
+                </div>
+            </label>
+        </div>
+        <div class="interest-item" style="background-image: url('https://picsum.photos/400/300?learning')">
+            <label class="checkbox-container">
+                <input type="checkbox" name="interests" value="learning">
+                <div class="interest-content">
+                    <h3>Learning</h3>
+                    <span class="interest-desc">Workshops, classes, skill-building</span>
+                </div>
+            </label>
+        </div>
+    </div>
+
+  
+    <div class="interest-item" style="background-image: url('https://picsum.photos/400/300?question-mark')">
+        <label class="checkbox-container">
+            <input type="checkbox" name="interests" value="surprise-me">
+            <div class="interest-content">
+                <h3>Surprise Me!</h3>
+                <span class="interest-desc">Include unexpected local experiences in my itinerary</span>
+            </div>
+        </label>
+    </div>
+</section>
+
+            <!-- Section 3: Travel Style -->
+            <section class="form-section" data-section="3">
+                <div class="section-header">
+                    <h2><span class="section-icon">✈️</span> Travel Style</h2>
+                </div>
+                <p class="section-desc">Help us understand how you like to travel</p>
+            
+                <div class="travel-style-container">
+                    <!-- Pace Preference -->
+                    <div class="style-group">
+                        <h3>Travel Pace</h3>
+                        <div class="style-options">
+                            <label class="style-option">
+                                <input type="radio" name="pace" value="relaxed">
+                                <div class="style-content">
+                                    <h4>Relaxed</h4>
+                                    <p>Plenty of free time, flexible schedule</p>
+                                </div>
+                            </label>
+            
+                            <label class="style-option">
+                                <input type="radio" name="pace" value="balanced">
+                                <div class="style-content">
+                                    <h4>Balanced</h4>
+                                    <p>Mix of activities and downtime</p>
+                                </div>
+                            </label>
+            
+                            <label class="style-option">
+                                <input type="radio" name="pace" value="active">
+                                <div class="style-content">
+                                    <h4>Active</h4>
+                                    <p>Full schedule, maximize experiences</p>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+            
+                    <!-- Transportation Preference -->
+                    <div class="style-group">
+                        <h3>Preferred Transportation</h3>
+                        <div class="style-options transport-options">
+                            <label class="style-option">
+                                <input type="radio" name="transport" value="walking">
+                                <div class="style-content">
+                                    <h4>Walking</h4>
+                                    <p>Explore primarily on foot</p>
+                                </div>
+                            </label>
+            
+                            <label class="style-option">
+                                <input type="radio" name="transport" value="public">
+                                <div class="style-content">
+                                    <h4>Public Transit</h4>
+                                    <p>Local buses, trains, metro</p>
+                                </div>
+                            </label>
+            
+                            <label class="style-option">
+                                <input type="radio" name="transport" value="private">
+                                <div class="style-content">
+                                    <h4>Private Transport</h4>
+                                    <p>Taxis, ride-shares, rentals</p>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+            
+                    <!-- Accommodation Style -->
+                    <div class="style-group">
+                        <h3>Accommodation Preference</h3>
+                        <div class="style-options">
+                            <label class="style-option">
+                                <input type="radio" name="accommodation" value="budget">
+                                <div class="style-content">
+                                    <h4>Budget-Friendly</h4>
+                                    <p>Hostels, guesthouses, shared spaces</p>
+                                </div>
+                            </label>
+            
+                            <label class="style-option">
+                                <input type="radio" name="accommodation" value="midrange">
+                                <div class="style-content">
+                                    <h4>Mid-Range</h4>
+                                    <p>3-star hotels, private rooms</p>
+                                </div>
+                            </label>
+            
+                            <label class="style-option">
+                                <input type="radio" name="accommodation" value="luxury">
+                                <div class="style-content">
+                                    <h4>Luxury</h4>
+                                    <p>4-5 star hotels, premium stays</p>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Navigation buttons -->
+            <div class="form-navigation">
+                <button type="button" id="prevBtn" class="nav-button" disabled>
+                    <span class="button-icon">←</span> Previous
+                </button>
+                <button type="button" id="nextBtn" class="nav-button">
+                    Next <span class="button-icon">→</span>
+                </button>
+                <button type="submit" id="submitBtn" class="nav-button submit-button" onclick="window.location.href='itinerary.html'" style="display: none;">
+                    Create My Itinerary <span class="button-icon">✨</span>
+                </button>
+            </div>
+        </form>
+    </main>
+
+    <footer>
+        <!-- ... existing footer ... -->
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="assets/data/destinations.js"></script>
+
+    <script src="js/auth.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/autocomplete.js"></script>
+    <script src="js/preferences.js"></script>
+</body>
+</html>
