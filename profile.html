@@ -263,6 +263,51 @@
             font-size: 0.9rem;
             margin-top: 1rem;
         }
+
+        .itinerary-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .itinerary-item {
+            display: block;
+            padding: 1rem 1.5rem;
+            background: #f8fdf8;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .itinerary-item:hover {
+            background: #f0f9f0;
+            transform: translateX(5px);
+            box-shadow: 0 2px 8px rgba(76, 175, 80, 0.1);
+        }
+
+        .itinerary-main {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.3rem;
+        }
+
+        .itinerary-location {
+            font-weight: 600;
+            color: #2e7d32;
+        }
+
+        .itinerary-duration {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .itinerary-dates {
+            font-size: 0.85rem;
+            color: #888;
+        }
     </style>
 </head>
 <body>
@@ -401,6 +446,33 @@
                         <label for="jetLag" class="tag quirky">time zone collector</label>
                     </div>
                     <div class="selection-counter">0/3 traits selected</div>
+                </div>
+
+                <div class="profile-section">
+                    <h2 class="section-title">Previous Itineraries</h2>
+                    <div class="itinerary-list">
+                        <a href="#" class="itinerary-item">
+                            <div class="itinerary-main">
+                                <span class="itinerary-location">Japan: Tokyo & Kyoto</span>
+                                <span class="itinerary-duration">12 days</span>
+                            </div>
+                            <div class="itinerary-dates">March 15 - 27, 2024</div>
+                        </a>
+                        <a href="#" class="itinerary-item">
+                            <div class="itinerary-main">
+                                <span class="itinerary-location">Greece: Athens & Santorini</span>
+                                <span class="itinerary-duration">8 days</span>
+                            </div>
+                            <div class="itinerary-dates">September 5 - 13, 2023</div>
+                        </a>
+                        <a href="#" class="itinerary-item">
+                            <div class="itinerary-main">
+                                <span class="itinerary-location">Costa Rica: San José & Manuel Antonio</span>
+                                <span class="itinerary-duration">7 days</span>
+                            </div>
+                            <div class="itinerary-dates">July 1 - 8, 2023</div>
+                        </a>
+                    </div>
                 </div>
 
                 <div class="profile-stats">

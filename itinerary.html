@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Itinerary - Wanderlust Explorer</title>
+    <title>Your Itinerary - ExploreAI</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <style>
@@ -234,13 +234,13 @@
             right: -350px;
             top: 100px;
             width: 350px;
-            height: 100vh;
+            height: calc(100vh - 100px);
             background: #fff;
             box-shadow: -2px 0 5px rgba(0,0,0,0.1);
             transition: right 0.3s ease;
             z-index: 999;
             overflow-y: auto;
-            padding: 80px 20px 20px;
+            padding: 20px 20px 100px;
         }
 
         .cultural-sidebar.open {
@@ -435,6 +435,37 @@
             from { opacity: 0; transform: translateY(-10px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        .day-header {
+            position: relative;
+        }
+
+        .day-map-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 2;
+            background: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .day-map-button i {
+            color: #4CAF50;
+            font-size: 1.2em;
+        }
+
+        .day-map-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+        }
     </style>
 </head>
 <body>
@@ -484,6 +515,9 @@
             
     <div class="day-container">
         <div class="day-header">
+            <div class="day-map-button">
+                <i class="fas fa-map-marked-alt"></i>
+            </div>
             <div class="day-header-background">
                 <img src="assets/images/day1.png" alt="Day 1 Background" class="day-header-image">
             </div>
@@ -670,6 +704,9 @@
 
     <div class="day-container">
         <div class="day-header">
+            <div class="day-map-button">
+                <i class="fas fa-map-marked-alt"></i>
+            </div>
             <div class="day-header-background">
                 <img src="assets/images/chef.png" alt="Day 1 Background" class="day-header-image">
             </div>
@@ -811,6 +848,9 @@
 
     <div class="day-container">
         <div class="day-header">
+            <div class="day-map-button">
+                <i class="fas fa-map-marked-alt"></i>
+            </div>
             <div class="day-header-background">
                 <img src="assets/images/mountain.png" alt="Day 1 Background" class="day-header-image">
             </div>
